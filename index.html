@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr. Mohamed Mostafa — Cardiologist & AI Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Manrope:wght@500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0F172A;
+    --bg-deep:#080C14;
+    --surface:rgba(10,14,26,0.87);
+    --copper:#C2410C;
+    --copper-light:#EA580C;
+    --text:#F8FAFC;
+    --text-dim:#94A3B8;
+    --success:#16A34A;
+    --border-copper:rgba(234,88,12,0.45);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    font-weight:500;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* premium grid-depth canvas + copper floor glow (from the just.dr.moh design system) */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(194,65,12,0.10), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 50% 110%, rgba(194,65,12,0.12), transparent 65%),
+      var(--bg);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(234,88,12,0.05) 0 1px, transparent 1px 96px),
+      repeating-linear-gradient(90deg, rgba(148,163,184,0.04) 0 1px, transparent 1px 96px);
+    mask-image:linear-gradient(to bottom, transparent 0%, #000 30%, #000 70%, transparent 100%);
+    opacity:0.6;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;
+    background:rgba(8,12,20,0.55);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(148,163,184,0.08);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.01em;font-size:17px}
+  .brand .pulse{color:var(--copper-light);font-size:20px}
+  .brand b{color:var(--copper-light)}
+  nav .links{display:flex;gap:26px;align-items:center}
+  nav a{color:var(--text-dim);text-decoration:none;font-size:14px;font-weight:700;transition:color .2s}
+  nav a:hover{color:var(--text)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--copper);color:#fff;text-decoration:none;
+    font-weight:800;font-size:14px;
+    padding:11px 20px;border-radius:8px;
+    border:1px solid var(--copper-light);
+    transition:transform .15s ease, box-shadow .2s ease, background .2s;
+    box-shadow:0 6px 24px rgba(194,65,12,0.25);
+  }
+  .btn:hover{background:var(--copper-light);transform:translateY(-2px);box-shadow:0 10px 30px rgba(194,65,12,0.38)}
+  .btn.ghost{background:transparent;color:var(--text);box-shadow:none;border:1px solid rgba(234,88,12,0.5)}
+  .btn.ghost:hover{background:rgba(234,88,12,0.12)}
+
+  .eyebrow{
+    font-size:13px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--copper-light);
+  }
+
+  /* HERO */
+  header{padding:170px 0 90px;position:relative}
+  .hero-inner{max-width:780px}
+  h1{
+    font-size:clamp(38px,6vw,68px);line-height:1.04;font-weight:800;letter-spacing:-0.025em;
+    margin:22px 0 0;
+  }
+  h1 .accent{color:var(--copper-light)}
+  .hero-ar{
+    font-family:'Cairo',sans-serif;font-weight:900;direction:rtl;
+    font-size:clamp(22px,3.4vw,34px);color:var(--text);margin-top:18px;
+  }
+  .hero-sub{
+    font-size:clamp(16px,2vw,19px);color:var(--text-dim);max-width:600px;margin:24px 0 36px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .trust{display:flex;gap:28px;margin-top:46px;flex-wrap:wrap}
+  .trust .item{display:flex;flex-direction:column;gap:2px}
+  .trust .num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:30px;color:var(--text)}
+  .trust .lbl{font-size:13px;color:var(--text-dim);font-weight:600}
+
+  /* SECTION TITLE */
+  .section{padding:70px 0}
+  .section-head{margin-bottom:42px;max-width:620px}
+  .section-head h2{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-0.02em;margin-top:10px}
+  .section-head p{color:var(--text-dim);margin-top:12px;font-size:16px}
+  .rule{height:2px;width:54px;background:var(--copper);margin-top:16px;border-radius:2px}
+
+  /* PROJECT GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .card{
+    background:var(--surface);
+    border:1px solid rgba(148,163,184,0.12);
+    border-top:2px solid var(--border-copper);
+    border-radius:10px;padding:26px;
+    box-shadow:0 6px 28px rgba(0,0,0,0.55);
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px);border-top-color:var(--copper-light);box-shadow:0 16px 44px rgba(0,0,0,0.6)}
+  .card.soon{opacity:0.66}
+  .tagrow{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+  .pill{
+    font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;
+    padding:5px 10px;border-radius:999px;
+  }
+  .pill.live{background:rgba(22,163,74,0.15);color:#22C55E;border:1px solid rgba(22,163,74,0.4)}
+  .pill.live::before{content:"●";margin-right:6px;font-size:9px;vertical-align:middle}
+  .pill.type{background:rgba(234,88,12,0.12);color:var(--copper-light);border:1px solid rgba(234,88,12,0.35)}
+  .pill.soon{background:rgba(148,163,184,0.12);color:var(--text-dim);border:1px solid rgba(148,163,184,0.25)}
+  .card h3{font-size:22px;font-weight:800;letter-spacing:-0.01em;margin-bottom:10px}
+  .card p{color:var(--text-dim);font-size:15px;flex:1}
+  .card .go{margin-top:18px;color:var(--copper-light);font-weight:800;font-size:14px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+  .card .go:hover{gap:10px}
+
+  /* CASE STUDY */
+  .case{padding:30px 0 70px}
+  .case-hero{
+    background:var(--surface);border:1px solid rgba(148,163,184,0.12);
+    border-top:2px solid var(--copper);border-radius:12px;
+    padding:38px;box-shadow:0 8px 34px rgba(0,0,0,0.5);
+  }
+  .case-hero .tagrow{margin-bottom:18px}
+  .case-hero h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-0.02em}
+  .case-hero .ar{font-family:'Cairo',sans-serif;font-weight:900;direction:rtl;color:var(--copper-light);font-size:22px;margin-top:8px}
+  .case-hero .lead{color:var(--text-dim);font-size:17px;margin-top:16px;max-width:680px}
+  .case-block{margin-top:40px}
+  .case-block .eyebrow{display:block;margin-bottom:10px}
+  .case-block h4{font-size:22px;font-weight:800;margin-bottom:12px;letter-spacing:-0.01em}
+  .case-block p{color:var(--text-dim);font-size:16px;max-width:760px}
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:20px}
+  .feat .f{
+    background:rgba(8,12,20,0.5);border:1px solid rgba(148,163,184,0.1);
+    border-radius:8px;padding:16px 18px;
+  }
+  .feat .f .ck{color:var(--success);font-weight:900;margin-right:8px}
+  .feat .f b{font-weight:800;font-size:15px}
+  .feat .f span{display:block;color:var(--text-dim);font-size:14px;margin-top:4px}
+  .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .chip{
+    font-family:'Manrope';font-weight:800;font-size:13px;
+    background:rgba(8,12,20,0.6);border:1px solid rgba(234,88,12,0.3);
+    color:var(--text);padding:9px 14px;border-radius:8px;
+  }
+  .chip .free{color:var(--success)}
+  .builtby{
+    margin-top:34px;display:flex;gap:16px;align-items:flex-start;
+    background:linear-gradient(90deg, rgba(194,65,12,0.10), transparent);
+    border-left:3px solid var(--copper);border-radius:8px;padding:20px 22px;
+  }
+  .builtby .ico{font-size:26px}
+  .builtby p{color:var(--text);font-size:16px;font-weight:600;max-width:680px}
+  .builtby p b{color:var(--copper-light)}
+  .case-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .note{display:flex;align-items:center;gap:8px;color:var(--text-dim);font-size:13.5px;font-weight:600;margin-top:14px}
+  .note .dot{color:var(--copper-light)}
+
+  /* CONTACT / FOOTER */
+  footer{padding:70px 0 50px;border-top:1px solid rgba(148,163,184,0.1);margin-top:40px;text-align:center}
+  footer h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em}
+  footer p{color:var(--text-dim);margin:14px auto 28px;max-width:520px}
+  .foot-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .copyright{margin-top:46px;color:var(--text-dim);font-size:13px}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:640px){
+    nav .links a:not(.btn){display:none}
+    .trust{gap:20px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="pulse">❤</span> Dr.&nbsp;Mohamed&nbsp;<b>Mostafa</b></div>
+  <div class="links">
+    <a href="#projects">Projects</a>
+    <a href="#tarek">Case study</a>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero-inner reveal">
+    <span class="eyebrow">Cardiologist · AI &amp; Automation Builder</span>
+    <h1>AI tools that do <span class="accent">real jobs</span> in real clinics.</h1>
+    <div class="hero-ar">طبيب قلب بيبني أدوات ذكاء اصطناعي شغالة فعلاً</div>
+    <p class="hero-sub">I'm a practicing cardiologist who designs, builds, and ships AI automation — bilingual, safe, and tested in actual medical practice. Not demos. Live products you can open right now.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#tarek">See the live demo →</a>
+      <a class="btn ghost" href="#projects">View all projects</a>
+    </div>
+    <div class="trust">
+      <div class="item"><span class="num">1</span><span class="lbl">Live product shipped</span></div>
+      <div class="item"><span class="num">2</span><span class="lbl">Languages — AR &amp; EN</span></div>
+      <div class="item"><span class="num">$0</span><span class="lbl">Running cost to build</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Projects that earn their keep</h2>
+      <p>Each one does a real job — and is built to a professional standard, not vibe-coded. One at a time, fully finished and live.</p>
+      <div class="rule"></div>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal">
+        <div class="tagrow">
+          <span class="pill live">Live</span>
+          <span class="pill type">Chatbot</span>
+        </div>
+        <h3>Tarek — AI Clinic Assistant</h3>
+        <p>A bilingual AI front-desk that answers patients 24/7, gives safe medical guidance, and books appointments straight into the clinic's records — no app, no extra staff.</p>
+        <a class="go" href="#tarek">Read the case study →</a>
+      </div>
+
+      <div class="card soon reveal">
+        <div class="tagrow">
+          <span class="pill soon">In build</span>
+          <span class="pill type">Workflow AI</span>
+        </div>
+        <h3>AI Medical Scribe</h3>
+        <p>Turns a doctor's spoken consultation into a clean, structured clinical note in seconds. Built for my own daily clinic work first.</p>
+        <span class="go" style="color:var(--text-dim)">Coming soon</span>
+      </div>
+
+      <div class="card soon reveal">
+        <div class="tagrow">
+          <span class="pill soon">In build</span>
+          <span class="pill type">Content / Writing</span>
+        </div>
+        <h3>Patient-Education Hub</h3>
+        <p>A live library of accurate, plain-language medical articles in Arabic — a showcase of medical writing powered by an AI workflow.</p>
+        <span class="go" style="color:var(--text-dim)">Coming soon</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="case" id="tarek">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <div class="tagrow">
+        <span class="pill live">Live now</span>
+        <span class="pill type">Project 01 · AI Chatbot</span>
+      </div>
+      <h2>Tarek — the AI front-desk for clinics</h2>
+      <div class="ar">طارق — مساعد استقبال ذكي للعيادة</div>
+      <p class="lead">A 24/7 bilingual AI receptionist that answers patients in real Egyptian Arabic and English, gives safe medical guidance, and books appointments automatically — designed and safety-tuned by a practicing cardiologist.</p>
+      <div class="case-cta">
+        <a class="btn" href="https://cairo-heart-clinic-demo.onrender.com" target="_blank" rel="noopener">Open the live demo →</a>
+      </div>
+      <div class="note"><span class="dot">⏳</span> The demo runs on a free server — give it up to a minute to wake up on the first click.</div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The problem</span>
+      <h4>Clinics lose patients in the gaps</h4>
+      <p>A question at 11pm. "What do I do before the test?" "Do I even need to come in?" When no one answers, the patient books somewhere else. Front-desk staff can't be online around the clock — and most clinic chatbots are worse than nothing: they either invent dangerous medical advice or can't actually <em>do</em> anything useful.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The solution</span>
+      <h4>An AI receptionist that actually works — safely</h4>
+      <p>Tarek talks to patients in natural Egyptian Arabic and English, around the clock. He answers heart-health questions, explains things in plain language, gives safe first-aid guidance and flags clearly when a patient should head to the ER, and books appointments straight into the clinic's Google Sheet. No app to download, no extra staff to hire.</p>
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>Answers FAQs 24/7</b><span>Hours, location, services, prep instructions — instantly.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Plain-language medical help</b><span>Explains conditions &amp; medications in real Egyptian Arabic.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Safe triage &amp; escalation</b><span>Flags red-flag symptoms → "see a doctor now."</span></div>
+        <div class="f"><b><span class="ck">✓</span>Books appointments</b><span>Captures the booking into Google Sheets automatically.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Fully bilingual</b><span>Switches between Arabic and English seamlessly.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Secure by design</b><span>No exposed keys, least-privilege, filtered output.</span></div>
+      </div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">Why it's not "just a GPT wrapper"</span>
+      <h4>Built to a professional security standard</h4>
+      <p>Most AI bots are "vibe-coded" — the API key sits exposed in the patient's browser, there are no safety limits, and they're trivial to break. (A scan of 5,600 such apps found 2,000+ vulnerabilities and 400+ leaked keys.) Tarek is built on the secure backend-proxy pattern: the key never touches the patient's phone, every reply is filtered as plain text, and the bot can only do safe things — answer and book, nothing else. There's nothing for an attacker to steal and nothing dangerous for it to do.</p>
+      <div class="stack">
+        <span class="chip">Gemini — the brain</span>
+        <span class="chip">Python backend proxy</span>
+        <span class="chip">Google Sheets booking</span>
+        <span class="chip">Render hosting</span>
+        <span class="chip"><span class="free">$0</span> running cost</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🩺</span>
+      <p>Designed, safety-tuned, and built by a <b>practicing cardiologist</b> — so the medical guidance is correct, the tone fits real patients, and the bot knows exactly when to stop and say "go see a doctor." That's the part a generic developer can't do.</p>
+    </div>
+
+    <div class="case-cta reveal">
+      <a class="btn" href="https://cairo-heart-clinic-demo.onrender.com" target="_blank" rel="noopener">Try Tarek live →</a>
+      <a class="btn ghost" href="#contact">Want one for your clinic?</a>
+    </div>
+    <div class="note reveal"><span class="dot">⏳</span> Hosted on a free server — the demo can take up to a minute to wake on first load. This is a generic demo clinic; your version would be built around your own clinic's data.</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Let's build</span>
+    <h2>Need an AI tool that does a real job?</h2>
+    <p>I build bilingual, secure AI automation for clinics and healthcare businesses — and I understand the medicine. Tell me what's eating your team's time.</p>
+    <div class="foot-links">
+      <a class="btn" href="mailto:drmoh.pioneer@gmail.com">Email me →</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/dr-mohamed-mostafa" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://www.tiktok.com/@just.dr.moh" target="_blank" rel="noopener">TikTok</a>
+      <a class="btn ghost" href="https://www.youtube.com/@just.dr.mohamed" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="copyright">© 2026 Dr. Mohamed Mostafa · Cairo, Egypt · Built with the just.dr.moh design system</div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
