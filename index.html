@@ -133,6 +133,8 @@
   .pill.live::before{content:"●";margin-right:6px;font-size:9px;vertical-align:middle}
   .pill.type{background:rgba(234,88,12,0.12);color:var(--copper-light);border:1px solid rgba(234,88,12,0.35)}
   .pill.soon{background:rgba(148,163,184,0.12);color:var(--text-dim);border:1px solid rgba(148,163,184,0.25)}
+  .pill.beta{background:rgba(234,88,12,0.14);color:var(--copper-light);border:1px solid rgba(234,88,12,0.5)}
+  .pill.beta::before{content:"●";margin-right:6px;font-size:9px;vertical-align:middle}
   .card h3{font-size:22px;font-weight:800;letter-spacing:-0.01em;margin-bottom:10px}
   .card p{color:var(--text-dim);font-size:15px;flex:1}
   .card .go{margin-top:18px;color:var(--copper-light);font-weight:800;font-size:14px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
@@ -180,6 +182,23 @@
   .note{display:flex;align-items:center;gap:8px;color:var(--text-dim);font-size:13.5px;font-weight:600;margin-top:14px}
   .note .dot{color:var(--copper-light)}
 
+  /* SCRIBE transcript -> note demo */
+  .scribe-demo{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-top:20px}
+  .scribe-col{background:rgba(8,12,20,0.55);border:1px solid rgba(148,163,184,0.1);border-radius:10px;padding:18px 20px}
+  .scribe-col .lab{font-size:11.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;display:block}
+  .scribe-raw{font-family:'Cairo',sans-serif;direction:rtl;color:var(--text-dim);font-size:14.5px;line-height:1.95;white-space:pre-line;max-height:430px;overflow:auto}
+  .scribe-arrow{display:flex;align-items:center;justify-content:center;color:var(--copper-light);font-size:30px;font-weight:900;padding-top:30px}
+  .note-row{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(148,163,184,0.08);font-size:14px}
+  .note-row:last-child{border-bottom:none}
+  .note-row .k{color:var(--copper-light);font-weight:800;min-width:78px;flex-shrink:0}
+  .note-row .v{color:var(--text)}
+  .scribe-shot{width:100%;border-radius:10px;border:1px solid rgba(148,163,184,0.14);margin-top:20px;box-shadow:0 10px 34px rgba(0,0,0,0.5)}
+  .privacy-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+  .privacy-steps .ps{background:rgba(8,12,20,0.5);border:1px solid rgba(148,163,184,0.1);border-left:3px solid var(--copper);border-radius:8px;padding:14px 16px}
+  .privacy-steps .ps b{font-size:14px;font-weight:800;display:block;margin-bottom:3px}
+  .privacy-steps .ps span{color:var(--text-dim);font-size:13.5px}
+  @media(max-width:760px){.scribe-demo{grid-template-columns:1fr}.scribe-arrow{transform:rotate(90deg);padding:0}}
+
   /* CONTACT / FOOTER */
   footer{padding:70px 0 50px;border-top:1px solid rgba(148,163,184,0.1);margin-top:40px;text-align:center}
   footer h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-0.02em}
@@ -221,7 +240,7 @@
     <div class="trust">
       <div class="item"><span class="num">1</span><span class="lbl">Live product shipped</span></div>
       <div class="item"><span class="num">2</span><span class="lbl">Languages — AR &amp; EN</span></div>
-      <div class="item"><span class="num">$0</span><span class="lbl">Running cost to build</span></div>
+      <div class="item"><span class="num">24/7</span><span class="lbl">AI that never clocks out</span></div>
     </div>
   </div>
 </header>
@@ -246,14 +265,14 @@
         <a class="go" href="#tarek">Read the case study →</a>
       </div>
 
-      <div class="card soon reveal">
+      <div class="card reveal">
         <div class="tagrow">
-          <span class="pill soon">In build</span>
+          <span class="pill beta">Beta · in trial</span>
           <span class="pill type">Workflow AI</span>
         </div>
-        <h3>AI Medical Scribe</h3>
-        <p>Turns a doctor's spoken consultation into a clean, structured clinical note in seconds. Built for my own daily clinic work first.</p>
-        <span class="go" style="color:var(--text-dim)">Coming soon</span>
+        <h3>Hakeem — AI Medical Scribe</h3>
+        <p>Records a spoken consultation and turns it into a clean, structured clinical note — in real Egyptian Arabic — while the patient's identity never leaves the doctor's own machine. Built for my daily clinic work first.</p>
+        <a class="go" href="#hakeem">Read the case study →</a>
       </div>
 
       <div class="card soon reveal">
@@ -315,7 +334,6 @@
         <span class="chip">Python backend proxy</span>
         <span class="chip">Google Sheets booking</span>
         <span class="chip">Render hosting</span>
-        <span class="chip"><span class="free">$0</span> running cost</span>
       </div>
     </div>
 
@@ -329,6 +347,104 @@
       <a class="btn ghost" href="#contact">Want one for your clinic?</a>
     </div>
     <div class="note reveal"><span class="dot">⏳</span> Hosted on a free server — the demo can take up to a minute to wake on first load. This is a generic demo clinic; your version would be built around your own clinic's data.</div>
+  </div>
+</section>
+
+<section class="case" id="hakeem">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <div class="tagrow">
+        <span class="pill beta">Beta · in private trial</span>
+        <span class="pill type">Project 02 · AI Scribe</span>
+      </div>
+      <h2>Hakeem — the AI scribe that speaks your Arabic</h2>
+      <div class="ar">حكيم — كاتب الكشف الذكي للطبيب المصري</div>
+      <p class="lead">An ambient AI scribe for Egyptian doctors. It listens to the consultation in real colloquial Arabic and writes the clinical note for you — while the patient's identity never leaves your computer. Currently in private trial on my own clinic visits.</p>
+      <div class="note"><span class="dot">📹</span> Full walkthrough video coming. It runs on real patient consultations, so there's no public click-to-try demo — here's exactly what it does instead.</div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The problem</span>
+      <h4>Notes eat the doctor's day — and foreign tools can't do our Arabic</h4>
+      <p>Every visit ends with paperwork. Western AI scribes exist, but they choke on Egyptian colloquial Arabic, send patient data to foreign clouds, and weren't built for how a doctor here actually talks and writes. So most of us still type notes by hand, after hours.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The solution</span>
+      <h4>Speak the visit. Get the note.</h4>
+      <p>Hakeem records the consultation, transcribes the messy spoken Arabic on the doctor's own machine, and structures it into a clean clinical note in the exact terse shorthand a cardiologist actually writes — in English <em>and</em> Arabic, plus a referral letter and a patient-friendly report. The doctor reviews, edits, and exports.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">See it work</span>
+      <h4>A real demo visit → the note Hakeem wrote</h4>
+      <p>Left: the raw spoken consultation, exactly as said — overlapping, half-finished, full of slang. Right: the structured note Hakeem produced from it, untouched.</p>
+      <div class="scribe-demo">
+        <div class="scribe-col">
+          <span class="lab">Raw transcript · demo consultation (fictional patient)</span>
+          <div class="scribe-raw">ازيك؟
+عندي وجع في بطني وبدوخ وبقيت
+عندك كام سنة؟ تلاتين سنة
+عندك ضغط أو سكر؟ لا الحمد لله
+مشاكل في الكبد أو الكلى؟ ما أعتقدش
+جالك قبل كده جلطات؟ لا الحمد لله
+عملتي رسم قلب؟ ما عملتش
+عملتي إيكو قبل كده؟ ما عملتش — هنحتاج نعمل إيكو
+عملتي تحاليل قريب؟ عملت سي بي سي
+الهيموجلوبين كان كام؟ حداشر تقريبًا
+ضغطك مية وعشرين على تمانين
+الهارت ريت خمسة وتمانين
+الشيست كلير
+البلان: هنعمل إيكو
+وهنعمل وظايف غدة — تي إس إتش وفري تي تري وتي فور
+ونتابع إن شاء الله
+الصداع اللي بييجي ده؟
+خدي بنادول وبلاش مسكنات تانية لحد ما نعمل التحاليل وتيجي</div>
+        </div>
+        <div class="scribe-arrow">→</div>
+        <div class="scribe-col">
+          <span class="lab">Hakeem's note · Clinical Note (EN) — untouched</span>
+          <div class="note-row"><span class="k">History</span><span class="v">30-year-old female, no comorbidities, presenting with abdominal pain, dizziness, vomiting, and headache</span></div>
+          <div class="note-row"><span class="k">C/O</span><span class="v">Abdominal pain, dizziness, vomiting, and headache</span></div>
+          <div class="note-row"><span class="k">S/P</span><span class="v">—</span></div>
+          <div class="note-row"><span class="k">ECG</span><span class="v">—</span></div>
+          <div class="note-row"><span class="k">Echo</span><span class="v">—</span></div>
+          <div class="note-row"><span class="k">O/E</span><span class="v">BP 120/80, HR 85; chest clear; cardiac normal; LL —</span></div>
+          <div class="note-row"><span class="k">Labs</span><span class="v">Recent CBC: Hb ~11</span></div>
+          <div class="note-row"><span class="k">Plan</span><span class="v">Investigations: Echo, TSH, free T3, T4. Meds: Panadol PRN for headache; avoid other painkillers. Follow up with results.</span></div>
+        </div>
+      </div>
+      <div class="note"><span class="dot">●</span> Note how it kept the English medical shorthand, caught every clinical detail from broken speech, and invented nothing — empty sections stay empty.</div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">Why it's safe</span>
+      <h4>The patient's identity never leaves the doctor's computer</h4>
+      <p>This is the part that matters for medical data. The audio is transcribed locally; names and identifiers are stripped on the machine before anything is sent; only de-identified placeholder text reaches the cloud (on a no-training tier); and the real values are restored locally on the final note.</p>
+      <div class="privacy-steps">
+        <div class="ps"><b>1 · Local transcription</b><span>whisper.cpp runs on the machine — the audio never leaves the computer.</span></div>
+        <div class="ps"><b>2 · Identifiers stripped here</b><span>Names &amp; IDs removed locally, before anything is sent.</span></div>
+        <div class="ps"><b>3 · Only de-identified text sent</b><span>The cloud sees placeholder tokens, never the real identity — no-training tier.</span></div>
+        <div class="ps"><b>4 · Real values restored locally</b><span>The final note gets the real details back, on the doctor's machine.</span></div>
+      </div>
+      <img class="scribe-shot" src="hakeem-ui.png" alt="Hakeem AI Medical Scribe — app interface showing the local de-identification steps and the generated clinical note" loading="lazy" />
+      <div class="stack">
+        <span class="chip">whisper.cpp — local ASR</span>
+        <span class="chip">On-machine de-identification</span>
+        <span class="chip">Gemini — structuring</span>
+        <span class="chip">EN + AR + referral + patient report</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🩺</span>
+      <p>Built by a <b>practicing cardiologist</b> — so the note comes out in the exact shorthand a doctor actually writes, the Arabic is real clinic Arabic, and the privacy model is designed for how patient data is really handled. A generic developer would not know what a good note looks like.</p>
+    </div>
+
+    <div class="case-cta reveal">
+      <a class="btn ghost" href="#contact">Want it for your clinic? Get in touch →</a>
+    </div>
+    <div class="note reveal"><span class="dot">⏳</span> In private trial now — measuring accuracy on real consultations before a wider release.</div>
   </div>
 </section>
 
