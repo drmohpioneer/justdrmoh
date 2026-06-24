@@ -42,7 +42,7 @@
     <div class="logo">CAIRO HEART CLINIC</div>
     <div class="ring"></div>
     <h1>بنحضّرلك المساعد طارق<span class="dot">.</span></h1>
-    <p class="sub">لحظات وهيفتح معاك — أول زيارة بتاخد شوية وقت عشان المساعد بيقوم من وضع التوفير.</p>
+    <p class="sub">أول زيارة بتاخد حوالي نص دقيقة — السيرفر بيقوم من وضع توفير الطاقة. هيفتح لوحده أول ما يجهز.</p>
     <div class="bar"><i></i></div>
     <a class="btn" id="go" href="https://cairo-heart-clinic-demo.onrender.com">افتح المساعد الآن</a>
     <p class="note">
@@ -53,20 +53,21 @@
 <script>
 (function(){
   var TAREK = "https://cairo-heart-clinic-demo.onrender.com";
+  var start = Date.now();
   var redirected = false;
   function go(){ if(redirected) return; redirected = true; window.location.replace(TAREK); }
 
-  // Fire the wake request. Render holds this open during cold-start and
-  // resolves it the moment the app is ready -> then we redirect to a warm app.
-  fetch(TAREK, { mode:"no-cors", cache:"no-store" })
-    .then(go)
-    .catch(function(){ /* network/opaque issues: fall back to timers below */ });
+  // Wake Render with an image GET — the browser always sends it. Render HOLDS the
+  // request during cold-start and responds once the app is up; the root returns HTML
+  // (not an image) so onerror fires = app is warm -> redirect to an already-warm app.
+  var w = new Image();
+  w.onload = w.onerror = function(){ if(Date.now() - start > 5000) go(); };
+  w.src = TAREK + "/?wake=" + Date.now();
 
-  // Show a manual button after 10s for impatient visitors.
-  setTimeout(function(){ document.getElementById("go").style.display = "inline-block"; }, 10000);
-
-  // Safety net: if the wake-fetch never resolves, redirect anyway at 65s.
-  setTimeout(go, 65000);
+  // Manual button after 8s (for impatient visitors / already-warm app).
+  setTimeout(function(){ document.getElementById("go").style.display = "inline-block"; }, 8000);
+  // Safety net: redirect by 50s regardless (Tarek warms in ~30-40s).
+  setTimeout(go, 50000);
 })();
 </script>
 </body>
