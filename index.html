@@ -139,6 +139,15 @@
   .card p{color:var(--text-dim);font-size:15px;flex:1}
   .card .go{margin-top:18px;color:var(--copper-light);font-weight:800;font-size:14px;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
   .card .go:hover{gap:10px}
+  /* project-card thumbnail — bleeds to the card edges */
+  .card-shot{
+    width:calc(100% + 52px);margin:-26px -26px 20px;height:176px;
+    object-fit:cover;object-position:top center;display:block;
+    border-radius:9px 9px 0 0;border-bottom:1px solid rgba(148,163,184,0.12);
+    background:var(--bg-deep);
+  }
+  .pill.flag{background:rgba(234,88,12,0.18);color:#FB923C;border:1px solid rgba(234,88,12,0.6)}
+  .pill.flag::before{content:"★";margin-right:6px;font-size:9px;vertical-align:middle}
 
   /* CASE STUDY */
   .case{padding:30px 0 70px}
@@ -222,7 +231,7 @@
   <div class="brand"><span class="pulse">❤</span> Dr.&nbsp;Mohamed&nbsp;<b>Mostafa</b></div>
   <div class="links">
     <a href="#projects">Projects</a>
-    <a href="#tarek">Case study</a>
+    <a href="#pulse">Case studies</a>
     <a class="btn" href="#contact">Get in touch</a>
   </div>
 </nav>
@@ -234,11 +243,11 @@
     <div class="hero-ar">طبيب قلب بيبني أدوات ذكاء اصطناعي شغالة فعلاً</div>
     <p class="hero-sub">I'm a practicing cardiologist who designs, builds, and ships AI automation — bilingual, safe, and tested in actual medical practice. Not demos. Live products you can open right now.</p>
     <div class="hero-cta">
-      <a class="btn" href="#tarek">See the live demo →</a>
-      <a class="btn ghost" href="#projects">View all projects</a>
+      <a class="btn" href="#projects">See the projects →</a>
+      <a class="btn ghost" href="#pulse">Read a case study</a>
     </div>
     <div class="trust">
-      <div class="item"><span class="num">3</span><span class="lbl">Real products built</span></div>
+      <div class="item"><span class="num">4</span><span class="lbl">Real products built</span></div>
       <div class="item"><span class="num">2</span><span class="lbl">Live — open them right now</span></div>
       <div class="item"><span class="num">AR + EN</span><span class="lbl">Fully bilingual by default</span></div>
     </div>
@@ -256,6 +265,18 @@
     <div class="grid">
 
       <div class="card reveal">
+        <img class="card-shot" src="pulse-dashboard.jpg" alt="Pulse dashboard tracking a cardiac arrest — showing rhythm, CPR cycle, shock count and the next recommended action" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill flag">Flagship</span>
+          <span class="pill type">Open source</span>
+        </div>
+        <h3>Pulse — AI Teammate for Cardiac Arrest</h3>
+        <p>An AI that listens to a resuscitation, tracks the state of the arrest, and surfaces the next action without being asked — while a deterministic engine, never the AI, holds the clinical state. Built in one week for OpenAI Build Week: public repo, demo film, 443 tests.</p>
+        <a class="go" href="#pulse">Read the case study →</a>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-shot" src="tarek-chat.jpg" alt="Tarek clinic assistant chat — bilingual Arabic and English welcome with quick-reply options" loading="lazy" />
         <div class="tagrow">
           <span class="pill live">Live</span>
           <span class="pill type">Chatbot</span>
@@ -266,6 +287,7 @@
       </div>
 
       <div class="card reveal">
+        <img class="card-shot" src="hakeem-ui.png" alt="Hakeem medical scribe interface showing the local de-identification steps and generated note" loading="lazy" />
         <div class="tagrow">
           <span class="pill beta">Beta · in trial</span>
           <span class="pill type">Workflow AI</span>
@@ -276,6 +298,7 @@
       </div>
 
       <div class="card reveal">
+        <img class="card-shot" src="bedaya-app.jpg" alt="Bedaya web app — Arabic landing screen for a personalised weight-loss starting point" loading="lazy" />
         <div class="tagrow">
           <span class="pill live">Live</span>
           <span class="pill type">Health Web App</span>
@@ -289,12 +312,75 @@
   </div>
 </section>
 
+<section class="case" id="pulse">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <div class="tagrow">
+        <span class="pill flag">OpenAI Build Week 2026</span>
+        <span class="pill type">Project 01 · AI Clinical Teammate</span>
+      </div>
+      <h2>Pulse — the AI teammate for a cardiac arrest</h2>
+      <div class="ar">بَلس — زميل ذكي وقت السكتة القلبية</div>
+      <p class="lead">During a resuscitation, the team leader has to track the rhythm, the CPR cycle, how many shocks were given, when the last drug went in, and what to do next — all from memory, in a loud and moving room. Pulse listens, keeps that picture correct, and surfaces the next action without being asked. Built end to end in one week for OpenAI Build Week.</p>
+      <div class="case-cta">
+        <a class="btn" href="https://youtu.be/Ou2HArr33Ag" target="_blank" rel="noopener">▶ Watch the 2-minute demo</a>
+        <a class="btn ghost" href="https://github.com/drmohpioneer/pulse" target="_blank" rel="noopener">View the code →</a>
+      </div>
+      <div class="note"><span class="dot">●</span> A research prototype, not a medical device and not for use on real patients. Built to show the engineering, honestly labelled about its limits.</div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The problem</span>
+      <h4>The information is already in the room — nobody can hold all of it</h4>
+      <p>Cardiac arrest is one of the most cognitively overloaded moments in medicine. Everything a leader needs to track is being said out loud by the team, but no one can hold rhythm, timing, shock count, drug timing, and the next decision in their head at once while the room is loud and moving. A CPR timer counts seconds and knows nothing about the patient. An AI scribe writes a document for afterwards. A chatbot waits to be asked. None of them is a teammate.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The solution</span>
+      <h4>A teammate that listens, tracks the state, and speaks up</h4>
+      <p>Pulse listens to the room through a single phone, works out what is actually happening, and keeps the team's shared picture of the arrest correct and current — surfacing the next action, the timers, and the reversible causes to check, without being asked.</p>
+      <img class="scribe-shot" src="pulse-dashboard.jpg" alt="Pulse dashboard during a shockable arrest — VF rhythm, CPR cycle timer, shock count, and 'consider amiodarone' surfaced before anyone asked" loading="lazy" />
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>Tracks the whole arrest</b><span>Rhythm, CPR cycle, shocks, drug timing, reversible causes — live.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Surfaces the next action</b><span>The primary action and its rationale, derived from state.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Hears English &amp; Egyptian Arabic</b><span>Understands the room as it's actually spoken, code-switched.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Never guesses silently</b><span>Every accepted event is confirmed and auditable, with undo.</span></div>
+      </div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">Why it's not "just a GPT wrapper"</span>
+      <h4>The AI is never allowed to change clinical state</h4>
+      <p>The core design rule: everything Pulse hears becomes <em>evidence</em>, never fact. A deterministic state machine — which contains no AI at all — is the only thing that ever advances the clinical state. When a team member states a completion out loud ("shock delivered"), that spoken confirmation is accepted and shown, with a 30-second undo; an order ("give 1 mg epinephrine") only waits as a pending card until the loop is closed. Echoes of the same shout can't inflate the shock count, and an off-protocol event raises an explicit deviation advisory. The whole pipeline is swept by 29 scripted resuscitation scenarios and locked by 443 automated tests.</p>
+      <img class="scribe-shot" src="pulse-confirmation.jpg" alt="Pulse showing a spoken medication order waiting as a pending confirmation card until the loop is closed" loading="lazy" />
+      <div class="stack">
+        <span class="chip">Deterministic clinical engine</span>
+        <span class="chip">Evidence → fusion → confirmation</span>
+        <span class="chip">FastAPI + Next.js</span>
+        <span class="chip">Swappable speech-to-text</span>
+        <span class="chip">443 tests · 29 scenarios</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🩺</span>
+      <p>Designed and built by a <b>practicing cardiologist</b> — so the workflow follows real ACLS resuscitation, the closed-loop confirmation mirrors how a real team already talks, and the safety boundary (AI proposes, a deterministic engine decides) is the one a clinician would insist on. Built with <b>Codex and GPT-5.6</b> against a written safety constitution.</p>
+    </div>
+
+    <div class="case-cta reveal">
+      <a class="btn" href="https://youtu.be/Ou2HArr33Ag" target="_blank" rel="noopener">Watch the demo →</a>
+      <a class="btn ghost" href="https://github.com/drmohpioneer/pulse" target="_blank" rel="noopener">Read the code &amp; tests</a>
+    </div>
+    <div class="note reveal"><span class="dot">⏳</span> Runs locally from the public repo with no API keys required. A research prototype — unvalidated, and explicitly not for clinical use.</div>
+  </div>
+</section>
+
 <section class="case" id="tarek">
   <div class="wrap">
     <div class="case-hero reveal">
       <div class="tagrow">
         <span class="pill live">Live now</span>
-        <span class="pill type">Project 01 · AI Chatbot</span>
+        <span class="pill type">Project 02 · AI Chatbot</span>
       </div>
       <h2>Tarek — the AI front-desk for clinics</h2>
       <div class="ar">طارق — مساعد استقبال ذكي للعيادة</div>
@@ -323,6 +409,7 @@
         <div class="f"><b><span class="ck">✓</span>Fully bilingual</b><span>Switches between Arabic and English seamlessly.</span></div>
         <div class="f"><b><span class="ck">✓</span>Secure by design</b><span>No exposed keys, least-privilege, filtered output.</span></div>
       </div>
+      <img class="scribe-shot" src="tarek-chat.jpg" alt="Tarek clinic assistant — the live chat opening with a bilingual welcome and quick-reply options for emergencies, first aid, and booking" loading="lazy" />
     </div>
 
     <div class="case-block reveal">
@@ -355,7 +442,7 @@
     <div class="case-hero reveal">
       <div class="tagrow">
         <span class="pill beta">Beta · in private trial</span>
-        <span class="pill type">Project 02 · AI Scribe</span>
+        <span class="pill type">Project 03 · AI Scribe</span>
       </div>
       <h2>Hakeem — the AI scribe that speaks your Arabic</h2>
       <div class="ar">حكيم — كاتب الكشف الذكي للطبيب المصري</div>
@@ -453,7 +540,7 @@
     <div class="case-hero reveal">
       <div class="tagrow">
         <span class="pill live">Live now</span>
-        <span class="pill type">Project 03 · Health Web App</span>
+        <span class="pill type">Project 04 · Health Web App</span>
       </div>
       <h2>Bedaya — a real starting point for anyone who wants to begin</h2>
       <div class="ar">بداية — أول خطوة لأي حد عايز يبدأ</div>
@@ -482,6 +569,7 @@
         <div class="f"><b><span class="ck">✓</span>Works for eating out</b><span>Real "what to order" guidance, not just home cooking.</span></div>
         <div class="f"><b><span class="ck">✓</span>Completely free</b><span>No ads, no upsell — the tool I wished I'd had.</span></div>
       </div>
+      <img class="scribe-shot" src="bedaya-app.jpg" alt="Bedaya web app — the Arabic landing screen inviting anyone to get their real numbers and a plan in two minutes" loading="lazy" />
     </div>
 
     <div class="case-block reveal">
