@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="ar">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>المساعد الذكي طارق — Cairo Heart Clinic</title>
 <meta name="robots" content="noindex">
+<script>
+// Pick the language BEFORE first paint so there is no Arabic flash for an English visitor.
+// ?lang=en / ?lang=ar overrides; otherwise follow the browser. Anything non-Arabic gets English.
+(function(){
+  var q = (location.search.match(/[?&]lang=(ar|en)/) || [])[1];
+  var lang = q || ((navigator.language || "en").toLowerCase().indexOf("ar") === 0 ? "ar" : "en");
+  var h = document.documentElement;
+  h.className = lang;
+  h.lang = lang;
+  h.dir = lang === "ar" ? "rtl" : "ltr";
+  if (lang === "en") document.title = "Tarek, your clinic assistant — Cairo Heart Clinic";
+})();
+</script>
 <style>
   :root{ --navy:#0f2236; --navy2:#16314c; --copper:#c8814b; --copper-soft:#e0a673; --ink:#eaf1f8; --muted:#9fb3c8; }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -15,6 +28,9 @@
     color:var(--ink); min-height:100%;
     display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
   }
+  /* One copy deck per language; the <html> class decides which one is in the page. */
+  html.ar [data-l="en"]{ display:none; }
+  html.en [data-l="ar"]{ display:none; }
   .card{ max-width:440px; width:100%; }
   .logo{ font-size:13px; letter-spacing:2px; color:var(--copper-soft); margin-bottom:18px; text-transform:uppercase; }
   h1{ font-size:26px; font-weight:800; margin-bottom:10px; }
@@ -41,12 +57,25 @@
   <div class="card">
     <div class="logo">CAIRO HEART CLINIC</div>
     <div class="ring"></div>
-    <h1>بنحضّرلك المساعد طارق<span class="dot">.</span></h1>
-    <p class="sub">أول زيارة بتاخد حوالي نص دقيقة — السيرفر بيقوم من وضع توفير الطاقة. هيفتح لوحده أول ما يجهز.</p>
+
+    <h1 data-l="ar">بنحضّرلك المساعد طارق<span class="dot">.</span></h1>
+    <h1 data-l="en">Waking up Tarek, your clinic assistant<span class="dot">.</span></h1>
+
+    <p class="sub" data-l="ar">أول زيارة بتاخد حوالي نص دقيقة — السيرفر بيقوم من وضع توفير الطاقة. هيفتح لوحده أول ما يجهز.</p>
+    <p class="sub" data-l="en">The first visit takes about 30 seconds while the server wakes from sleep. It opens by itself as soon as it is ready.</p>
+
     <div class="bar"><i></i></div>
-    <a class="btn" id="go" href="https://cairo-heart-clinic-demo.onrender.com">افتح المساعد الآن</a>
-    <p class="note">
+
+    <a class="btn" id="go" href="https://cairo-heart-clinic-demo.onrender.com">
+      <span data-l="ar">افتح المساعد الآن</span>
+      <span data-l="en">Open the assistant now</span>
+    </a>
+
+    <p class="note" data-l="ar">
       نموذج تجريبي على استضافة مجانية — <b>بوت مشروعك بيشتغل فوري وبدون أي انتظار</b> على استضافة مخصصة، وقابل للتعديل أو الإزالة بالكامل.
+    </p>
+    <p class="note" data-l="en">
+      This is a demo on free hosting. <b>Your own bot runs instantly with no wait</b> on dedicated hosting, and every part of it is editable or removable.
     </p>
   </div>
 
