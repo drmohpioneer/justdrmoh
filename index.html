@@ -202,6 +202,8 @@
   .note-row .k{color:var(--copper-light);font-weight:800;min-width:78px;flex-shrink:0}
   .note-row .v{color:var(--text)}
   .scribe-shot{width:100%;border-radius:10px;border:1px solid rgba(148,163,184,0.14);margin-top:20px;box-shadow:0 10px 34px rgba(0,0,0,0.5)}
+  /* the Lajument ad is a vertical 9:16 reel: phone-width and centered, like the clip it is */
+  video.scribe-shot{max-width:390px;display:block;margin-inline:auto}
   .privacy-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
   .privacy-steps .ps{background:rgba(8,12,20,0.5);border:1px solid rgba(148,163,184,0.1);border-left:3px solid var(--copper);border-radius:8px;padding:14px 16px}
   .privacy-steps .ps b{font-size:14px;font-weight:800;display:block;margin-bottom:3px}
@@ -247,8 +249,8 @@
       <a class="btn ghost" href="#pulse">Read a case study</a>
     </div>
     <div class="trust">
-      <div class="item"><span class="num">4</span><span class="lbl">Real products built</span></div>
-      <div class="item"><span class="num">2</span><span class="lbl">Live — open them right now</span></div>
+      <div class="item"><span class="num">5</span><span class="lbl">Real builds shipped</span></div>
+      <div class="item"><span class="num">3</span><span class="lbl">Live — open them right now</span></div>
       <div class="item"><span class="num">AR + EN</span><span class="lbl">Fully bilingual by default</span></div>
     </div>
   </div>
@@ -306,6 +308,17 @@
         <h3>Bedaya — Your Starting Point</h3>
         <p>A free Arabic web app that gives anyone beginning a weight-loss journey their real numbers and a plan built around the Egyptian food they actually eat — in two minutes. The medical math is locked; the AI only personalises the food.</p>
         <a class="go" href="#bedaya">Read the case study →</a>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-shot" src="lajument-store.jpg" alt="La Jument Noire storefront hero, a black horse in golden light above the brand name" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill live">Live</span>
+          <span class="pill type">Client work · E-commerce</span>
+        </div>
+        <h3>La Jument Noire — A Store She Runs Alone</h3>
+        <p>A complete bilingual online store for a handmade leather brand in Cairo. The owner edits pieces, prices and photos from her own panel and every change is live in about two minutes. Delivered end to end, then handed over completely: she owns every account.</p>
+        <a class="go" href="#lajument">Read the case study →</a>
       </div>
 
     </div>
@@ -596,6 +609,68 @@
       <a class="btn ghost" href="#contact">Want a tool like this?</a>
     </div>
     <div class="note reveal"><span class="dot">⏳</span> Hosted on a free server — it can take up to a minute to wake on first load.</div>
+  </div>
+</section>
+
+
+<section class="case" id="lajument">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <div class="tagrow">
+        <span class="pill live">Live now</span>
+        <span class="pill type">Project 05 · Client work · E-commerce</span>
+      </div>
+      <h2>La Jument Noire — a store its owner runs entirely alone</h2>
+      <div class="ar">متجر كامل، صاحبته بتديره بنفسها من موبايلها</div>
+      <p class="lead">A handmade leather brand in Cairo needed more than a social page: a real store, in two languages, that its owner could run without calling a developer ever again. That last part is the actual product.</p>
+      <div class="case-cta">
+        <a class="btn" href="https://lajumentnoire.com" target="_blank" rel="noopener">Open the live store →</a>
+      </div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">18 seconds</span>
+      <h4>The brand, in motion</h4>
+      <video class="scribe-shot" src="lajument-ad.mp4" poster="lajument-ad-poster.jpg" controls preload="none" playsinline></video>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The build</span>
+      <h4>What makes it state of the art</h4>
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>Her own admin panel</b><span>She edits pieces, prices and photos herself. A save is live on the real site in about two minutes.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Every piece has a page</b><span>The order button opens a chat message already written: the piece, the size, the link.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Nothing goes stale</b><span>The sitemap and the Meta ads catalogue regenerate from her live data. Change a price, everything follows.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Bilingual to the digit</b><span>Arabic and English, including the numerals, switched in one tap.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Hardened like it matters</b><span>500+ automated tests, content escaping, security headers, a locked-down login.</span></div>
+        <div class="f"><b><span class="ck">✓</span>She owns everything</b><span>Domain, hosting, code and login all live on her own accounts. Handover means handover.</span></div>
+      </div>
+      <img class="scribe-shot" src="lajument-panel.jpg" alt="The owner&#39;s admin panel in Arabic, showing her product sections ready to edit" loading="lazy" />
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">Under the hood</span>
+      <h4>Serious engineering, invisible on purpose</h4>
+      <p>The storefront is static and fast; the moving parts run at the edge. Her panel commits straight to her own repository, the site rebuilds itself, and the pieces of data other platforms need (Google&#39;s sitemap, Meta&#39;s product feed) are generated on request from whatever she saved last. There is no database to maintain, no CMS subscription, and no monthly bill for her at all.</p>
+      <div class="stack">
+        <span class="chip">Cloudflare Pages + edge functions</span>
+        <span class="chip">Custom Git-backed panel</span>
+        <span class="chip">Hardened OAuth login</span>
+        <span class="chip">Self-generating Meta feed</span>
+        <span class="chip">Playwright regression suite</span>
+        <span class="chip">Zero running cost</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🤝</span>
+      <p>Delivered <b>end to end</b>: design, build, security hardening, deployment, owner training, and a full handover. The measure of done was never the launch. It was the owner running her store alone, which she does.</p>
+    </div>
+
+    <div class="case-cta reveal">
+      <a class="btn" href="https://lajumentnoire.com" target="_blank" rel="noopener">Open the live store →</a>
+      <a class="btn ghost" href="#contact">Want a store like this?</a>
+    </div>
   </div>
 </section>
 
