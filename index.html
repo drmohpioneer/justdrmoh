@@ -55,7 +55,7 @@
     position:fixed;top:0;left:0;right:0;z-index:50;
     display:flex;align-items:center;justify-content:space-between;
     padding:18px 28px;
-    background:rgba(8,12,20,0.55);
+    background:rgba(8,12,20,0.88);
     backdrop-filter:blur(12px);
     border-bottom:1px solid rgba(148,163,184,0.08);
   }
@@ -141,15 +141,29 @@
   .card .go:hover{gap:10px}
   /* project-card thumbnail — bleeds to the card edges */
   .card-shot{
-    width:calc(100% + 52px);margin:-26px -26px 20px;height:176px;
+    width:calc(100% + 52px);margin:-26px -26px 20px;height:auto;aspect-ratio:16/10;
     object-fit:cover;object-position:top center;display:block;
     border-radius:9px 9px 0 0;border-bottom:1px solid rgba(148,163,184,0.12);
     background:var(--bg-deep);
   }
+  .card-shot.fit{object-fit:contain;object-position:center;background:#0F172A}
+  .card{cursor:pointer}
   .pill.flag{background:rgba(234,88,12,0.18);color:#FB923C;border:1px solid rgba(234,88,12,0.6)}
   .pill.flag::before{content:"★";margin-right:6px;font-size:9px;vertical-align:middle}
 
-  /* CASE STUDY */
+  /* CASE STUDY — collapsed into an expandable viewer */
+  #case-viewer > .case{display:none;padding:26px 0 60px}
+  #case-viewer > .case.open{display:block;animation:caseIn .35s ease}
+  @keyframes caseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .case-hero{position:relative}
+  .case-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+    background:rgba(148,163,184,0.08);border:1px solid rgba(148,163,184,0.28);color:var(--text-dim);
+    font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background .2s,color .2s,border-color .2s}
+  .case-close:hover{background:var(--copper);border-color:var(--copper-light);color:#fff}
+  .viewer-hint{max-width:var(--maxw);margin:0 auto;padding:26px 28px 6px;color:var(--text-dim);font-size:14px;font-weight:600;display:flex;gap:8px;align-items:center}
+  .viewer-hint .dot{color:var(--copper-light)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--copper-light);outline-offset:2px}
   .case{padding:30px 0 70px}
   .case-hero{
     background:var(--surface);border:1px solid rgba(148,163,184,0.12);
@@ -201,7 +215,7 @@
   .note-row:last-child{border-bottom:none}
   .note-row .k{color:var(--copper-light);font-weight:800;min-width:78px;flex-shrink:0}
   .note-row .v{color:var(--text)}
-  .scribe-shot{width:100%;border-radius:10px;border:1px solid rgba(148,163,184,0.14);margin-top:20px;box-shadow:0 10px 34px rgba(0,0,0,0.5)}
+  .scribe-shot{width:100%;height:auto;border-radius:10px;border:1px solid rgba(148,163,184,0.14);margin-top:20px;box-shadow:0 10px 34px rgba(0,0,0,0.5)}
   /* the Lajument ad is a vertical 9:16 reel: phone-width and centered, like the clip it is */
   video.scribe-shot{max-width:390px;display:block;margin-inline:auto}
   .privacy-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
@@ -209,6 +223,40 @@
   .privacy-steps .ps b{font-size:14px;font-weight:800;display:block;margin-bottom:3px}
   .privacy-steps .ps span{color:var(--text-dim);font-size:13.5px}
   @media(max-width:760px){.scribe-demo{grid-template-columns:1fr}.scribe-arrow{transform:rotate(90deg);padding:0}}
+
+  /* CHIP NAV (scrollspy) */
+  .chipnav{position:sticky;top:61px;z-index:40;background:rgba(8,12,20,0.82);backdrop-filter:blur(12px);border-top:1px solid rgba(148,163,184,0.08);border-bottom:1px solid rgba(148,163,184,0.08)}
+  .chipnav .inner{max-width:var(--maxw);margin:0 auto;padding:10px 28px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .chipnav .inner::-webkit-scrollbar{display:none}
+  .chipnav a{flex:0 0 auto;font-size:12.5px;font-weight:800;color:var(--text-dim);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid rgba(148,163,184,0.18);transition:color .2s,border-color .2s,background .2s;white-space:nowrap}
+  .chipnav a:hover{color:var(--text);border-color:rgba(234,88,12,0.5)}
+  .chipnav a.on{color:#fff;background:var(--copper);border-color:var(--copper-light)}
+
+  section[id],footer[id]{scroll-margin-top:112px}
+
+  /* GRID GROUP LABELS */
+  .group-label{display:flex;align-items:center;gap:14px;margin:46px 0 20px}
+  .group-label .t{font-size:13px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper-light)}
+  .group-label .line{flex:1;height:1px;background:rgba(148,163,184,0.14)}
+  .group-note{color:var(--text-dim);font-size:15px;max-width:660px;margin:-6px 0 24px}
+  #lab{scroll-margin-top:112px}
+  .pill.lab{background:rgba(148,163,184,0.12);color:#CBD5E1;border:1px solid rgba(148,163,184,0.3)}
+
+  /* LAB INTRO */
+  .lab-intro{padding:80px 0 10px}
+  .lab-intro .rule{background:var(--copper)}
+
+  /* BACK TO TOP */
+  .backtop{position:fixed;right:22px;bottom:22px;z-index:60;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid rgba(234,88,12,0.45);color:var(--copper-light);font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+  .backtop.show{opacity:1;pointer-events:auto}
+  .backtop:hover{background:var(--copper);color:#fff}
+
+  /* REDUCED MOTION */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    #case-viewer > .case.open{animation:none}
+  }
 
   /* CONTACT / FOOTER */
   footer{padding:70px 0 50px;border-top:1px solid rgba(148,163,184,0.1);margin-top:40px;text-align:center}
@@ -222,8 +270,14 @@
   .reveal.in{opacity:1;transform:none}
 
   @media(max-width:640px){
+    nav{padding:12px 16px}
     nav .links a:not(.btn){display:none}
+    .brand{font-size:15px}
+    nav .btn{padding:9px 14px;font-size:13px;white-space:nowrap}
     .trust{gap:20px}
+    .chipnav{top:49px}
+    .chipnav .inner{padding:8px 16px}
+    section[id],footer[id]{scroll-margin-top:96px}
   }
 </style>
 </head>
@@ -233,7 +287,7 @@
   <div class="brand"><span class="pulse">❤</span> Dr.&nbsp;Mohamed&nbsp;<b>Mostafa</b></div>
   <div class="links">
     <a href="#projects">Projects</a>
-    <a href="#pulse">Case studies</a>
+    <a href="#lab">The lab</a>
     <a class="btn" href="#contact">Get in touch</a>
   </div>
 </nav>
@@ -243,14 +297,14 @@
     <span class="eyebrow">Cardiologist · AI &amp; Automation Builder</span>
     <h1>AI tools that do <span class="accent">real jobs</span> in real clinics.</h1>
     <div class="hero-ar">طبيب قلب بيبني أدوات ذكاء اصطناعي شغالة فعلاً</div>
-    <p class="hero-sub">I'm a practicing cardiologist who designs, builds, and ships AI automation — bilingual, safe, and tested in actual medical practice. Not demos. Live products you can open right now.</p>
+    <p class="hero-sub">I'm a practicing cardiologist who designs, builds, and ships AI automation — bilingual, safe, and tested in actual medical practice. Not demos: real tools in daily use, and the live ones are one click away.</p>
     <div class="hero-cta">
       <a class="btn" href="#projects">See the projects →</a>
-      <a class="btn ghost" href="#pulse">Read a case study</a>
+      <a class="btn ghost" href="#pulse">Read the flagship case study</a>
     </div>
     <div class="trust">
-      <div class="item"><span class="num">5</span><span class="lbl">Real builds shipped</span></div>
-      <div class="item"><span class="num">3</span><span class="lbl">Live — open them right now</span></div>
+      <div class="item"><span class="num">10</span><span class="lbl">Real builds shipped</span></div>
+      <div class="item"><span class="num">4</span><span class="lbl">Live — open them right now</span></div>
       <div class="item"><span class="num">AR + EN</span><span class="lbl">Fully bilingual by default</span></div>
     </div>
   </div>
@@ -261,13 +315,16 @@
     <div class="section-head reveal">
       <span class="eyebrow">Portfolio</span>
       <h2>Projects that earn their keep</h2>
-      <p>Each one does a real job — and is built to a professional standard, not vibe-coded. One at a time, fully finished and live.</p>
+      <p>Ten real builds, each doing a real job every day — for patients, for clients, or for me. Products and client work first; below them, the lab they came from.</p>
+      <p class="viewer-hint" style="padding:0;margin-top:14px"><span class="dot">●</span>&nbsp; Click any card to open its full case study below — press Esc or ✕ to close it.</p>
       <div class="rule"></div>
     </div>
+
+    <div class="group-label reveal" style="margin-top:0"><span class="t">Products &amp; client work</span><span class="line"></span></div>
     <div class="grid">
 
       <div class="card reveal">
-        <img class="card-shot" src="pulse-dashboard.jpg" alt="Pulse dashboard tracking a cardiac arrest — showing rhythm, CPR cycle, shock count and the next recommended action" loading="lazy" />
+        <img width="1200" height="800" class="card-shot" src="pulse-dashboard.jpg" alt="Pulse dashboard tracking a cardiac arrest — showing rhythm, CPR cycle, shock count and the next recommended action" loading="lazy" />
         <div class="tagrow">
           <span class="pill flag">Flagship</span>
           <span class="pill type">Open source</span>
@@ -278,7 +335,7 @@
       </div>
 
       <div class="card reveal">
-        <img class="card-shot" src="tarek-chat.jpg" alt="Tarek clinic assistant chat — bilingual Arabic and English welcome with quick-reply options" loading="lazy" />
+        <img width="1200" height="806" class="card-shot" src="tarek-chat.jpg" alt="Tarek clinic assistant chat — bilingual Arabic and English welcome with quick-reply options" loading="lazy" />
         <div class="tagrow">
           <span class="pill live">Live</span>
           <span class="pill type">Chatbot</span>
@@ -289,7 +346,7 @@
       </div>
 
       <div class="card reveal">
-        <img class="card-shot" src="hakeem-ui.png" alt="Hakeem medical scribe interface showing the local de-identification steps and generated note" loading="lazy" />
+        <img width="1400" height="876" class="card-shot" src="hakeem-ui.png" alt="Hakeem medical scribe interface showing the local de-identification steps and generated note" loading="lazy" />
         <div class="tagrow">
           <span class="pill beta">Beta · in trial</span>
           <span class="pill type">Workflow AI</span>
@@ -300,7 +357,7 @@
       </div>
 
       <div class="card reveal">
-        <img class="card-shot" src="bedaya-app.jpg" alt="Bedaya web app — Arabic landing screen for a personalised weight-loss starting point" loading="lazy" />
+        <img width="1200" height="806" class="card-shot" src="bedaya-app.jpg" alt="Bedaya web app — Arabic landing screen for a personalised weight-loss starting point" loading="lazy" />
         <div class="tagrow">
           <span class="pill live">Live</span>
           <span class="pill type">Health Web App</span>
@@ -311,7 +368,7 @@
       </div>
 
       <div class="card reveal">
-        <img class="card-shot" src="lajument-store.jpg" alt="La Jument Noire storefront hero, a black horse in golden light above the brand name" loading="lazy" />
+        <img width="2880" height="1800" class="card-shot" src="lajument-store.jpg" alt="La Jument Noire storefront hero, a black horse in golden light above the brand name" loading="lazy" />
         <div class="tagrow">
           <span class="pill live">Live</span>
           <span class="pill type">E-commerce</span>
@@ -321,16 +378,94 @@
         <a class="go" href="#lajument">Read the case study →</a>
       </div>
 
+      <div class="card reveal">
+        <img width="1600" height="1000" class="card-shot" src="chd-hub.jpg" alt="CHD Revision hub — interactive fetal circulation lesson with a clickable shunt diagram" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill live">Live</span>
+          <span class="pill type">Medical education</span>
+        </div>
+        <h3>EPS &amp; CHD Hubs — Interactive Cardiology Revision</h3>
+        <p>Two live web hubs that turn the hardest cardiology modules into diagrams you click and watch move. 15 animated lessons, a 106-question mock exam, and print-ready study books — built in days for a real exam, left online free for colleagues.</p>
+        <a class="go" href="#studyhubs">Read the case study →</a>
+      </div>
+
+    </div>
+
+    <div class="group-label reveal" id="lab"><span class="t">The lab · built for myself, used daily</span><span class="line"></span></div>
+    <p class="group-note reveal">The best way to judge what I'd build for you is what I build when the client is me: the tools that run my videos, my Mac, my money and my clinic notes every single day. None were built to be sold. All of them had to actually work.</p>
+    <div class="grid">
+
+      <div class="card reveal">
+        <img width="2024" height="900" class="card-shot" src="hyperframes-reel.jpg" alt="Four vertical frames from videos rendered by the Hyperframes engine — product ads and Arabic motion graphics" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill type">Video engine</span>
+          <span class="pill lab">The lab</span>
+        </div>
+        <h3>Hyperframes — Video as Code</h3>
+        <p>A motion-graphics engine where a video is written in HTML, CSS and JavaScript and rendered frame-perfect to 4K. The music is analyzed first, so every cut and movement lands on the beat. Powers my channel and paid client ads.</p>
+        <a class="go" href="#hyperframes">Read the case study →</a>
+      </div>
+
+      <div class="card reveal">
+        <img width="1600" height="1000" class="card-shot" src="jarvis-hud.jpg" alt="Jarvis voice HUD — a glowing particle orb speaking, with a greeting message on screen" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill type">Voice assistant</span>
+          <span class="pill lab">The lab</span>
+        </div>
+        <h3>Jarvis — Voice Command Center</h3>
+        <p>A bilingual voice assistant for my Mac and phone: about two seconds to a spoken answer, finds and sends real files, and follows me anywhere over a private encrypted network. English in, Egyptian Arabic in — it answers either way.</p>
+        <a class="go" href="#jarvis">Read the case study →</a>
+      </div>
+
+      <div class="card reveal">
+        <img width="1600" height="605" class="card-shot fit" src="falcon-system.jpg" alt="Falcon system diagram — disclosure watcher, structured read, halal gate, rules engine, Telegram card" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill type">Research system</span>
+          <span class="pill lab">The lab</span>
+        </div>
+        <h3>Falcon — Halal Trading Research</h3>
+        <p>A system I trust with my own money because it argues back: it reads the exchange's official filings every day, screens every stock by Shariah ratios computed from primary statements, and kills any strategy that can't survive three independent reviews.</p>
+        <a class="go" href="#falcon">Read the case study →</a>
+      </div>
+
+      <div class="card reveal">
+        <img width="1600" height="685" class="card-shot fit" src="drwhisper-app.jpg" alt="Dr Whisper — copper microphone app icon above the floating dictation pill" loading="lazy" />
+        <div class="tagrow">
+          <span class="pill type">macOS app</span>
+          <span class="pill lab">The lab</span>
+        </div>
+        <h3>Dr Whisper — Offline Medical Dictation</h3>
+        <p>Hold a key, speak Arabic or English, and clean text lands in any app. The speech model runs entirely on the machine — nothing you say ever leaves the computer, which is the only privacy model medical dictation should accept.</p>
+        <a class="go" href="#drwhisper">Read the case study →</a>
+      </div>
+
     </div>
   </div>
 </section>
 
+<div class="chipnav" id="chipnav">
+  <div class="inner">
+    <a href="#pulse">Pulse</a>
+    <a href="#tarek">Tarek</a>
+    <a href="#hakeem">Hakeem</a>
+    <a href="#bedaya">Bedaya</a>
+    <a href="#lajument">La Jument</a>
+    <a href="#studyhubs">Study Hubs</a>
+    <a href="#hyperframes">Hyperframes</a>
+    <a href="#jarvis">Jarvis</a>
+    <a href="#falcon">Falcon</a>
+    <a href="#drwhisper">Dr Whisper</a>
+  </div>
+</div>
+
+<div id="case-viewer">
 <section class="case" id="pulse">
   <div class="wrap">
     <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
       <div class="tagrow">
         <span class="pill flag">OpenAI Build Week 2026</span>
-        <span class="pill type">Project 01 · AI Clinical Teammate</span>
+        <span class="pill type">AI Clinical Teammate</span>
       </div>
       <h2>Pulse — the AI teammate for a cardiac arrest</h2>
       <div class="ar">بَلس — زميل ذكي وقت السكتة القلبية</div>
@@ -352,7 +487,7 @@
       <span class="eyebrow">The solution</span>
       <h4>A teammate that listens, tracks the state, and speaks up</h4>
       <p>Pulse listens to the room through a single phone, works out what is actually happening, and keeps the team's shared picture of the arrest correct and current — surfacing the next action, the timers, and the reversible causes to check, without being asked.</p>
-      <img class="scribe-shot" src="pulse-dashboard.jpg" alt="Pulse dashboard during a shockable arrest — VF rhythm, CPR cycle timer, shock count, and 'consider amiodarone' surfaced before anyone asked" loading="lazy" />
+      <img width="1200" height="800" class="scribe-shot" src="pulse-dashboard.jpg" alt="Pulse dashboard during a shockable arrest — VF rhythm, CPR cycle timer, shock count, and 'consider amiodarone' surfaced before anyone asked" loading="lazy" />
       <div class="feat">
         <div class="f"><b><span class="ck">✓</span>Tracks the whole arrest</b><span>Rhythm, CPR cycle, shocks, drug timing, reversible causes — live.</span></div>
         <div class="f"><b><span class="ck">✓</span>Surfaces the next action</b><span>The primary action and its rationale, derived from state.</span></div>
@@ -365,7 +500,7 @@
       <span class="eyebrow">Why it's not "just a GPT wrapper"</span>
       <h4>The AI is never allowed to change clinical state</h4>
       <p>The core design rule: everything Pulse hears becomes <em>evidence</em>, never fact. A deterministic state machine — which contains no AI at all — is the only thing that ever advances the clinical state. When a team member states a completion out loud ("shock delivered"), that spoken confirmation is accepted and shown, with a 30-second undo; an order ("give 1 mg epinephrine") only waits as a pending card until the loop is closed. Echoes of the same shout can't inflate the shock count, and an off-protocol event raises an explicit deviation advisory. The whole pipeline is swept by 29 scripted resuscitation scenarios and locked by 443 automated tests.</p>
-      <img class="scribe-shot" src="pulse-confirmation.jpg" alt="Pulse showing a spoken medication order waiting as a pending confirmation card until the loop is closed" loading="lazy" />
+      <img width="1200" height="800" class="scribe-shot" src="pulse-confirmation.jpg" alt="Pulse showing a spoken medication order waiting as a pending confirmation card until the loop is closed" loading="lazy" />
       <div class="stack">
         <span class="chip">Deterministic clinical engine</span>
         <span class="chip">Evidence → fusion → confirmation</span>
@@ -391,9 +526,10 @@
 <section class="case" id="tarek">
   <div class="wrap">
     <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
       <div class="tagrow">
         <span class="pill live">Live now</span>
-        <span class="pill type">Project 02 · AI Chatbot</span>
+        <span class="pill type">AI Front-desk</span>
       </div>
       <h2>Tarek — the AI front-desk for clinics</h2>
       <div class="ar">طارق — مساعد استقبال ذكي للعيادة</div>
@@ -422,13 +558,13 @@
         <div class="f"><b><span class="ck">✓</span>Fully bilingual</b><span>Switches between Arabic and English seamlessly.</span></div>
         <div class="f"><b><span class="ck">✓</span>Secure by design</b><span>No exposed keys, least-privilege, filtered output.</span></div>
       </div>
-      <img class="scribe-shot" src="tarek-chat.jpg" alt="Tarek clinic assistant — the live chat opening with a bilingual welcome and quick-reply options for emergencies, first aid, and booking" loading="lazy" />
+      <img width="1200" height="806" class="scribe-shot" src="tarek-chat.jpg" alt="Tarek clinic assistant — the live chat opening with a bilingual welcome and quick-reply options for emergencies, first aid, and booking" loading="lazy" />
     </div>
 
     <div class="case-block reveal">
       <span class="eyebrow">Why it's not "just a GPT wrapper"</span>
       <h4>Built to a professional security standard</h4>
-      <p>Most AI bots are "vibe-coded" — the API key sits exposed in the patient's browser, there are no safety limits, and they're trivial to break. (A scan of 5,600 such apps found 2,000+ vulnerabilities and 400+ leaked keys.) Tarek is built on the secure backend-proxy pattern: the key never touches the patient's phone, every reply is filtered as plain text, and the bot can only do safe things — answer and book, nothing else. There's nothing for an attacker to steal and nothing dangerous for it to do.</p>
+      <p>Most AI bots are "vibe-coded" — the API key sits exposed in the patient's browser, there are no safety limits, and they're trivial to break. Tarek is built on the secure backend-proxy pattern: the key never touches the patient's phone, every reply is filtered as plain text, and the bot can only do safe things — answer and book, nothing else. There's nothing for an attacker to steal and nothing dangerous for it to do.</p>
       <div class="stack">
         <span class="chip">Gemini — the brain</span>
         <span class="chip">Python backend proxy</span>
@@ -453,9 +589,10 @@
 <section class="case" id="hakeem">
   <div class="wrap">
     <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
       <div class="tagrow">
         <span class="pill beta">Beta · in private trial</span>
-        <span class="pill type">Project 03 · AI Scribe</span>
+        <span class="pill type">AI Medical Scribe</span>
       </div>
       <h2>Hakeem — the AI scribe that speaks your Arabic</h2>
       <div class="ar">حكيم — كاتب الكشف الذكي للطبيب المصري</div>
@@ -527,7 +664,7 @@
         <div class="ps"><b>3 · Only de-identified text sent</b><span>The cloud sees placeholder tokens, never the real identity — no-training tier.</span></div>
         <div class="ps"><b>4 · Real values restored locally</b><span>The final note gets the real details back, on the doctor's machine.</span></div>
       </div>
-      <img class="scribe-shot" src="hakeem-ui.png" alt="Hakeem AI Medical Scribe — app interface showing the local de-identification steps and the generated clinical note" loading="lazy" />
+      <img width="1400" height="876" class="scribe-shot" src="hakeem-ui.png" alt="Hakeem AI Medical Scribe — app interface showing the local de-identification steps and the generated clinical note" loading="lazy" />
       <div class="stack">
         <span class="chip">whisper.cpp — local ASR</span>
         <span class="chip">On-machine de-identification</span>
@@ -551,9 +688,10 @@
 <section class="case" id="bedaya">
   <div class="wrap">
     <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
       <div class="tagrow">
         <span class="pill live">Live now</span>
-        <span class="pill type">Project 04 · Health Web App</span>
+        <span class="pill type">Health Web App</span>
       </div>
       <h2>Bedaya — a real starting point for anyone who wants to begin</h2>
       <div class="ar">بداية — أول خطوة لأي حد عايز يبدأ</div>
@@ -582,7 +720,7 @@
         <div class="f"><b><span class="ck">✓</span>Works for eating out</b><span>Real "what to order" guidance, not just home cooking.</span></div>
         <div class="f"><b><span class="ck">✓</span>Completely free</b><span>No ads, no upsell — the tool I wished I'd had.</span></div>
       </div>
-      <img class="scribe-shot" src="bedaya-app.jpg" alt="Bedaya web app — the Arabic landing screen inviting anyone to get their real numbers and a plan in two minutes" loading="lazy" />
+      <img width="1200" height="806" class="scribe-shot" src="bedaya-app.jpg" alt="Bedaya web app — the Arabic landing screen inviting anyone to get their real numbers and a plan in two minutes" loading="lazy" />
     </div>
 
     <div class="case-block reveal">
@@ -616,9 +754,10 @@
 <section class="case" id="lajument">
   <div class="wrap">
     <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
       <div class="tagrow">
         <span class="pill live">Live now</span>
-        <span class="pill type">Project 05 · E-commerce</span>
+        <span class="pill type">E-commerce</span>
       </div>
       <h2>La Jument Noire — a premium store that runs itself</h2>
       <div class="ar">متجر فاخر بيدير نفسه</div>
@@ -631,7 +770,7 @@
     <div class="case-block reveal">
       <span class="eyebrow">18 seconds</span>
       <h4>The brand, in motion</h4>
-      <video class="scribe-shot" src="lajument-ad.mp4" poster="lajument-ad-poster.jpg" controls preload="none" playsinline></video>
+      <video class="scribe-shot" width="1280" height="2276" src="lajument-ad.mp4" poster="lajument-ad-poster.jpg" controls preload="none" playsinline></video>
     </div>
 
     <div class="case-block reveal">
@@ -645,7 +784,7 @@
         <div class="f"><b><span class="ck">✓</span>Hardened like it matters</b><span>500+ automated tests, content escaping, security headers, a locked-down login.</span></div>
         <div class="f"><b><span class="ck">✓</span>Ownership, fully transferred</b><span>Domain, hosting, code and login all live on the brand&#39;s own accounts. Handover means handover.</span></div>
       </div>
-      <img class="scribe-shot" src="lajument-panel.jpg" alt="The built-in admin studio in Arabic, product sections ready to edit" loading="lazy" />
+      <img width="2880" height="1800" class="scribe-shot" src="lajument-panel.jpg" alt="The built-in admin studio in Arabic, product sections ready to edit" loading="lazy" />
     </div>
 
     <div class="case-block reveal">
@@ -674,6 +813,220 @@
   </div>
 </section>
 
+<section class="case" id="studyhubs">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
+      <div class="tagrow">
+        <span class="pill live">Live now</span>
+        <span class="pill type">Medical education</span>
+      </div>
+      <h2>EPS &amp; CHD Hubs — cardiology you can click through</h2>
+      <div class="ar">مراجعة تفاعلية لكهربية القلب والعيوب الخلقية</div>
+      <p class="lead">An MD module exam was days away, and the material — electrophysiology and congenital heart disease — is exactly the kind you cannot learn from static slides. So I built the textbook I needed: two interactive web hubs where every mechanism is a diagram you click and watch move. They stayed online, free, for every colleague sitting the same exam.</p>
+      <div class="case-cta">
+        <a class="btn" href="https://drmohpioneer.github.io/chd-revision/" target="_blank" rel="noopener">Open the CHD hub →</a>
+        <a class="btn ghost" href="https://drmohpioneer.github.io/eps-revision/" target="_blank" rel="noopener">Open the EPS hub →</a>
+      </div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The problem</span>
+      <h4>Some medicine only makes sense in motion</h4>
+      <p>A re-entry circuit is a loop in time. A shunt is blood flowing the wrong way. Fetal circulation is a route. Slides and PDFs flatten exactly the thing that matters — direction, timing, flow — and then we wonder why these two modules are the ones everyone dreads.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The solution</span>
+      <h4>Fifteen lessons where the physiology moves</h4>
+      <p>Click a tachycardia and watch where the impulse loops, then read the ECG it produces. Click a shunt level and watch the blood cross it. Every animation is drawn by hand in code, in the true anatomical view, and verified before publish.</p>
+      <img width="1600" height="1000" class="scribe-shot" src="eps-hub.jpg" alt="EPS hub — SVT mechanisms lesson: a clickable re-entry circuit beside the ECG it produces" loading="lazy" />
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>15 interactive lessons</b><span>7 congenital + 8 electrophysiology, every mechanism animated inline.</span></div>
+        <div class="f"><b><span class="ck">✓</span>106-question mock exam</b><span>Built from real past-exam signal, with explanations.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Anatomy-verified visuals</b><span>Every heart drawn in true anterior view and checked before going live.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Study books &amp; mindmaps</b><span>Print-ready PDFs and landscape mindmaps generated from the same source.</span></div>
+      </div>
+      <img width="1600" height="1000" class="scribe-shot" src="chd-hub.jpg" alt="CHD hub — fetal circulation lesson with clickable shunts and live oxygen saturations" loading="lazy" />
+      <div class="stack">
+        <span class="chip">Hand-built SVG animation</span>
+        <span class="chip">Zero frameworks</span>
+        <span class="chip">GitHub Pages</span>
+        <span class="chip">Free <span class="free">forever</span></span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🩺</span>
+      <p>Built by a <b>cardiologist in the middle of his own exam sprint</b> — which is the whole point. The fastest way to test a medical-education tool is to need it yourself, days before the exam it was built for.</p>
+    </div>
+
+    <div class="case-cta reveal">
+      <a class="btn" href="https://drmohpioneer.github.io/chd-revision/" target="_blank" rel="noopener">Try the CHD hub →</a>
+      <a class="btn ghost" href="https://drmohpioneer.github.io/eps-revision/" target="_blank" rel="noopener">Try the EPS hub →</a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="case" id="hyperframes">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
+      <div class="tagrow">
+        <span class="pill type">Video engine</span>
+        <span class="pill lab">The lab</span>
+      </div>
+      <h2>Hyperframes — a video studio where every frame is code</h2>
+      <div class="ar">استوديو فيديو، كل فريم فيه مكتوب كود</div>
+      <p class="lead">Video editing was eating my week, and no template tool makes the videos I wanted. So I built an engine where a video is written like a web page — HTML, CSS and JavaScript compositions rendered frame-perfect to 4K. The music is analyzed first, so the motion lands on the beat, not near it.</p>
+      <div class="case-cta">
+        <a class="btn" href="https://www.youtube.com/@just.dr.mohamed" target="_blank" rel="noopener">Watch it on YouTube →</a>
+        <a class="btn ghost" href="#lajument">See the client ad it made →</a>
+      </div>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The output</span>
+      <h4>One engine, every format</h4>
+      <img width="2024" height="900" class="scribe-shot" src="hyperframes-reel.jpg" alt="Four vertical frames rendered by Hyperframes — a luxury leather ad and Arabic motion graphics with animated stat cards" loading="lazy" />
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>Compositions are code</b><span>Every scene is HTML/CSS/JS — versioned, reviewable and reusable like software.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Beat-matched by analysis</b><span>Tempo, beats and sections are extracted from the track and drive the choreography.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Renders true 4K</b><span>A headless browser draws every frame and pipes it straight to the encoder.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Long-form to ads</b><span>YouTube episodes, vertical shorts and paid client ads come off the same pipeline.</span></div>
+      </div>
+      <div class="stack">
+        <span class="chip">HTML/CSS/JS compositions</span>
+        <span class="chip">GSAP motion</span>
+        <span class="chip">Headless Chrome → ffmpeg</span>
+        <span class="chip">Beat &amp; section analysis</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🎬</span>
+      <p>Every video on my channel — and the brand ad in the La Jument case study above — came out of this engine. It was built because <b>my own channel needed it weekly</b>, and a weekly deadline is the most honest QA there is.</p>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="jarvis">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
+      <div class="tagrow">
+        <span class="pill type">Voice assistant</span>
+        <span class="pill lab">The lab</span>
+      </div>
+      <h2>Jarvis — a voice interface for my whole computer</h2>
+      <div class="ar">جارفيس — بكلّم جهازي وبيرد عليّا</div>
+      <p class="lead">A voice-first command center that runs on my Mac and follows me to my phone. I talk to it in English or Egyptian Arabic; it answers out loud in about two seconds, digs through my files, sends me documents, and keeps working when I leave the house.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">See it</span>
+      <h4>The HUD, mid-sentence</h4>
+      <img width="1600" height="1000" class="scribe-shot" src="jarvis-hud.jpg" alt="Jarvis HUD — a glowing particle orb in speaking state, with the greeting 'Good evening, Mohamed' on screen" loading="lazy" />
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>Speaks my Arabic</b><span>Egyptian colloquial in, spoken answers out — not textbook Arabic.</span></div>
+        <div class="f"><b><span class="ck">✓</span>~2 seconds to first word</b><span>A persistent AI brain stays warm instead of cold-starting on every question.</span></div>
+        <div class="f"><b><span class="ck">✓</span>On my phone, anywhere</b><span>Installed as an app over a private encrypted network — no public server, no account.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Hands me real files</b><span>Ask for a document and the file itself arrives — enforced by a code rail, not a promise.</span></div>
+      </div>
+      <div class="stack">
+        <span class="chip">Persistent Claude brain</span>
+        <span class="chip">WebGL particle HUD</span>
+        <span class="chip">Private tailnet PWA</span>
+        <span class="chip">EN + AR voice</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">⚡</span>
+      <p>Jarvis is the voice layer of a larger private system that runs my day. It's also where patterns get stress-tested before they reach client builds: the <b>"verify actions in code, never trust the AI's word"</b> rail here is the same discipline that makes the clinic bots trustworthy.</p>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="falcon">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
+      <div class="tagrow">
+        <span class="pill type">Research system</span>
+        <span class="pill lab">The lab</span>
+      </div>
+      <h2>Falcon — the trading system that tells me no</h2>
+      <div class="ar">فالكون — النظام اللي بيقولّي لأ</div>
+      <p class="lead">A research and execution system for the Egyptian stock exchange that I trust with my own money — which is exactly why most of its machinery exists to stop me. It reads the exchange's official filings every day, screens every stock by Shariah ratios computed from primary statements, and refuses any strategy that cannot survive independent adversarial review.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The system</span>
+      <h4>Five stages, every number auditable</h4>
+      <img width="1600" height="605" class="scribe-shot" src="falcon-system.jpg" alt="Falcon pipeline — disclosure watcher, structured read, halal gate, rules engine, daily Telegram card, with measurement rails beneath" loading="lazy" />
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>Primary sources only</b><span>Official exchange disclosures read daily into a durable, content-addressed ledger.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Halal screening from filings</b><span>Ratios computed from real financial statements, never from vendor labels.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Adversarial by design</b><span>Each strategy faces three independent reviews; the ones that fail are withdrawn.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Deterministic money rails</b><span>Fixed risk caps, one codepath moves the book, OCR true-up from broker screenshots.</span></div>
+      </div>
+      <div class="stack">
+        <span class="chip">Python + SQLite</span>
+        <span class="chip">Telegram bot</span>
+        <span class="chip">On-device Vision OCR</span>
+        <span class="chip">Runs unattended, daily</span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🦅</span>
+      <p>The most valuable thing Falcon ever produced was a <b>withdrawal</b>: a promising strategy killed by its own review process before it could cost real money. That measurement discipline — controls, invariants, adversarial review — is the same one I bring to medical AI.</p>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="drwhisper">
+  <div class="wrap">
+    <div class="case-hero reveal">
+      <button class="case-close" aria-label="Close case study">✕</button>
+      <div class="tagrow">
+        <span class="pill type">macOS app</span>
+        <span class="pill lab">The lab</span>
+      </div>
+      <h2>Dr Whisper — dictation that never touches the internet</h2>
+      <div class="ar">دكتور ويسبر — إملاء طبي من غير إنترنت خالص</div>
+      <p class="lead">Hold a key, speak, and clean text lands in whatever app you're in. The full speech model runs on the machine itself, so it works in a clinic basement with no signal — and nothing a doctor says about a patient ever leaves the computer.</p>
+    </div>
+
+    <div class="case-block reveal">
+      <span class="eyebrow">The product</span>
+      <h4>Press, speak, done</h4>
+      <img width="1600" height="685" class="scribe-shot" src="drwhisper-app.jpg" alt="Dr Whisper — copper microphone app icon above the floating dictation pill with a live waveform" loading="lazy" />
+      <div class="feat">
+        <div class="f"><b><span class="ck">✓</span>100% offline</b><span>The speech model runs locally — airplane mode changes nothing.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Knows the vocabulary</b><span>A custom dictionary teaches it drug names and clinic shorthand.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Works wherever you type</b><span>Any app, hold-to-talk, text appears at the cursor.</span></div>
+        <div class="f"><b><span class="ck">✓</span>Installable by anyone</b><span>Packaged with a one-double-click installer and plain instructions.</span></div>
+      </div>
+      <div class="stack">
+        <span class="chip">whisper.cpp · large-v3-turbo</span>
+        <span class="chip">Native macOS</span>
+        <span class="chip">Built on open-source VoiceInk</span>
+        <span class="chip">Zero <span class="free">cloud</span></span>
+      </div>
+    </div>
+
+    <div class="builtby reveal">
+      <span class="ico">🩺</span>
+      <p>The privacy model isn't a feature, it's the premise: for medical dictation, <b>the only server you can fully trust is no server</b>. The same conviction drives Hakeem's on-machine de-identification pipeline above.</p>
+    </div>
+  </div>
+</section>
+</div>
+
 <footer id="contact">
   <div class="wrap">
     <span class="eyebrow">Let's build</span>
@@ -689,11 +1042,71 @@
   </div>
 </footer>
 
+<a class="backtop" href="#" aria-label="Back to top">↑</a>
+
 <script>
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
   },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---- expandable case studies: one open at a time ----
+  const viewer=document.getElementById('case-viewer');
+  const CASES=[...viewer.querySelectorAll(':scope > section.case')];
+  const chips=[...document.querySelectorAll('.chipnav a')];
+  const chipFor={};chips.forEach(c=>chipFor[c.getAttribute('href').slice(1)]=c);
+  const isCase=id=>CASES.some(s=>s.id===id);
+  let openId=null;
+
+  function openCase(id,scroll=true){
+    if(!isCase(id))return false;
+    CASES.forEach(s=>s.classList.toggle('open',s.id===id));
+    chips.forEach(c=>c.classList.toggle('on',c===chipFor[id]));
+    viewer.classList.add('has-open');
+    openId=id;
+    const sec=document.getElementById(id);
+    sec.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+    if(scroll)requestAnimationFrame(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}));
+    history.replaceState(null,'','#'+id);
+    return true;
+  }
+  function closeCase(){
+    if(!openId)return;
+    const id=openId;openId=null;
+    CASES.forEach(s=>s.classList.remove('open'));
+    chips.forEach(c=>c.classList.remove('on'));
+    viewer.classList.remove('has-open');
+    history.replaceState(null,'',location.pathname);
+    const go=document.querySelector(`.card a.go[href="#${id}"]`);
+    if(go)go.closest('.card').scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  document.querySelectorAll('.case-close').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();closeCase()}));
+  addEventListener('keydown',e=>{if(e.key==='Escape')closeCase()});
+
+  // any in-page link to a case id opens that case (cards, chips, hero CTA, cross-links)
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]');
+    if(!a)return;
+    const id=a.getAttribute('href').slice(1);
+    if(isCase(id)){e.preventDefault();openCase(id)}
+  });
+  // whole card clickable
+  document.querySelectorAll('.card').forEach(c=>{
+    const go=c.querySelector('a.go[href^="#"]');
+    if(!go)return;
+    c.addEventListener('click',e=>{
+      if(e.target.closest('a'))return;
+      openCase(go.getAttribute('href').slice(1));
+    });
+  });
+  // deep links (e.g. shared #lajument) still work
+  const h0=location.hash.slice(1);
+  if(h0&&isCase(h0))openCase(h0);
+  addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(isCase(id))openCase(id)});
+
+  // back to top
+  const bt=document.querySelector('.backtop');
+  addEventListener('scroll',()=>{bt.classList.toggle('show',scrollY>900)},{passive:true});
 </script>
 </body>
 </html>
